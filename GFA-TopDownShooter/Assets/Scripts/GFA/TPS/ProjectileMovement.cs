@@ -13,6 +13,16 @@ namespace GFA.TPS.Movement
             get => _speed;
             set => _speed = value;
         }
+    
+
+        [SerializeField]
+        private bool _shouldDestroyOnCollision;
+        public bool ShouldDestroyOnCollision
+        {
+            get => _shouldDestroyOnCollision;
+            set => _shouldDestroyOnCollision = value;
+        }
+
 
         [SerializeField]
         private bool _shouldDisableOnCollision;
@@ -22,6 +32,16 @@ namespace GFA.TPS.Movement
             set => _shouldDisableOnCollision = value;
         }
 
+        [SerializeField]
+        private bool _shouldBounce;
+        public bool ShouldBounce
+        {
+            get => _shouldBounce;
+            set => _shouldBounce = value;
+        }
+
+        [SerializeField] private float _pushPower;
+
         private void Update()
         {
             var direction = transform.forward;
@@ -30,11 +50,26 @@ namespace GFA.TPS.Movement
 
             if (Physics.Raycast(transform.position,direction,out var hit, distance))
             {
+                if (hit.rigidbody)
+                {
+                    hit.rigidbody.AddForceAtPosition(-hit.normal * _speed * _pushPower,hit.point,ForceMode.Impulse);
+                }
+                if (ShouldDestroyOnCollision)
+                {
+                    Destroy(gameObject);
+                }
                 if (ShouldDisableOnCollision)
                 {
                     enabled = false;
                 }
+
                 targetPosition = hit.point;
+                if (ShouldBounce)
+                {
+                    var reflectedDirection = Vector3.Reflect(direction, hit.normal);
+                    transform.forward = reflectedDirection;
+                }
+
             }
 
             Debug.DrawLine(transform.position, targetPosition, Color.red);

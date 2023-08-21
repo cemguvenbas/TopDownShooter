@@ -11,6 +11,7 @@ namespace GFA.TPS.Mediators
     public class PlayerMediator : MonoBehaviour
     {
         private CharacterMovement _characterMovement;
+        private Shooter _shooter;
 
         private GameInput _gameInput;
 
@@ -24,6 +25,7 @@ namespace GFA.TPS.Mediators
         private void Awake()
         {
             _characterMovement = GetComponent<CharacterMovement>();
+            _shooter = GetComponent<Shooter>();
             _gameInput = new GameInput();
             _camera = Camera.main;
         }
@@ -32,11 +34,20 @@ namespace GFA.TPS.Mediators
         {
             _gameInput.Enable();
             _gameInput.Player.Dodge.performed += OnDodgeRequested;
+            _gameInput.Player.Shoot.performed += OnShootRequested;
         }
 
         private void OnDisable()
         {
             _gameInput.Disable();
+            _gameInput.Player.Dodge.performed -= OnDodgeRequested;
+            _gameInput.Player.Shoot.performed -= OnShootRequested;
+
+        }
+
+        private void OnShootRequested(InputAction.CallbackContext obj)
+        {
+            _shooter.Shoot();
         }
 
         private void OnDodgeRequested(InputAction.CallbackContext obj)
