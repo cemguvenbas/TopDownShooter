@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,6 +42,8 @@ namespace GFA.TPS.Movement
         }
 
         [SerializeField] private float _pushPower;
+
+        public event Action Impacted;
 
         private void Update()
         {
