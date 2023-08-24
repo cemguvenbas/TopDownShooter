@@ -34,20 +34,13 @@ namespace GFA.TPS.Mediators
         {
             _gameInput.Enable();
             _gameInput.Player.Dodge.performed += OnDodgeRequested;
-            _gameInput.Player.Shoot.performed += OnShootRequested;
         }
 
         private void OnDisable()
         {
             _gameInput.Disable();
             _gameInput.Player.Dodge.performed -= OnDodgeRequested;
-            _gameInput.Player.Shoot.performed -= OnShootRequested;
 
-        }
-
-        private void OnShootRequested(InputAction.CallbackContext obj)
-        {
-            _shooter.Shoot();
         }
 
         private void OnDodgeRequested(InputAction.CallbackContext obj)
@@ -57,13 +50,22 @@ namespace GFA.TPS.Mediators
 
         private void Update()
         {
+            HandleMovement();
+            if (_gameInput.Player.Shoot.IsPressed())
+            {
+                _shooter.Shoot();
+            }            
+        }
+
+        private void HandleMovement()
+        {
             var movementInput = _gameInput.Player.Movement.ReadValue<Vector2>();
             _characterMovement.MovementInput = movementInput;
             var ray = _camera.ScreenPointToRay(_gameInput.Player.PointerPosition.ReadValue<Vector2>());
             var gamepadLookDir = _gameInput.Player.Look.ReadValue<Vector2>();
             if (gamepadLookDir.magnitude > 0.1f)
             {
-                var angle = -Mathf.Atan2(gamepadLookDir.y, gamepadLookDir.x) * Mathf.Rad2Deg + 90; 
+                var angle = -Mathf.Atan2(gamepadLookDir.y, gamepadLookDir.x) * Mathf.Rad2Deg + 90;
                 _characterMovement.Rotation = angle;
             }
             else
@@ -76,7 +78,6 @@ namespace GFA.TPS.Mediators
                     _characterMovement.Rotation = angle;
                 }
             }
-            
         }
     }
 }

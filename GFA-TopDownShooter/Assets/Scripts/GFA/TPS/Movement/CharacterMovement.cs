@@ -8,7 +8,6 @@ namespace GFA.TPS.Movement
     public class CharacterMovement : MonoBehaviour
     {
         private CharacterController _characterController;
-
         public Vector3 ExternalForces { get; set; }
         public Vector2 MovementInput { get; set; }
 

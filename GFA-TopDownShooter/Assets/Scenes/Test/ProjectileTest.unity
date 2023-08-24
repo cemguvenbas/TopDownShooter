@@ -425,19 +425,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &815004801
-MonoBehaviour:
+--- !u!54 &815004801
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 815004796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b18b6789d550426479f52e33cbbfc85e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: 0
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &881575837
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,7 +570,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b18b6789d550426479f52e33cbbfc85e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 0
+  _health: 5
+  _explosionRadius: 5
+  _explosionDamage: 5
+  _explosionForce: 5
+  _explosionFalloff:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &961739749
 GameObject:
   m_ObjectHideFlags: 0
@@ -878,7 +901,7 @@ Transform:
   m_GameObject: {fileID: 1193657328}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.46, y: 1.47, z: 8.26}
+  m_LocalPosition: {x: -10.55, y: 1.47, z: 8.26}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -896,7 +919,97 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b18b6789d550426479f52e33cbbfc85e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 0
+  _health: 5
+  _explosionRadius: 15
+  _explosionDamage: 5
+  _explosionForce: 50
+  _explosionFalloff:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0.0033924072
+      outSlope: 0.0033924072
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.31710362
+      value: 1.0010757
+      inSlope: -0.025350649
+      outSlope: -0.025350649
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.38308626
+      value: 0.9975065
+      inSlope: -0.008532679
+      outSlope: -0.008532679
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.38461065
+      value: 0.99756294
+      inSlope: 0.08638276
+      outSlope: 0.08638276
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.40345365
+      value: 1.0001206
+      inSlope: 0.09945255
+      outSlope: 0.09945255
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.43370327
+      value: 1.0020314
+      inSlope: -0.0070877112
+      outSlope: -0.0070877112
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.45996857
+      value: 1
+      inSlope: -1.0400522
+      outSlope: -1.0400522
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8011836
+      value: 0.31662783
+      inSlope: -1.7736046
+      outSlope: -1.7736046
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0031397
+      value: 0.0047169924
+      inSlope: -1.5444483
+      outSlope: -1.5444483
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1261438369
 GameObject:
   m_ObjectHideFlags: 3
@@ -972,6 +1085,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4234730940746300685, guid: 275467fd10689b145a71eaa3883ebe5c,
+        type: 3}
+      propertyPath: _fireRate
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 8102719714095302332, guid: 275467fd10689b145a71eaa3883ebe5c,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -8,6 +8,18 @@ namespace GFA.TPS
     {
         [SerializeField]
         private float _health = 5;
+
+        [SerializeField]
+        private float _explosionRadius = 5;
+
+        [SerializeField]
+        private float _explosionDamage = 5;
+
+        [SerializeField]
+        private float _explosionForce = 50;
+
+        [SerializeField]
+        private AnimationCurve _explosionFalloff;
         public void ApplyDamage(float damage, GameObject causer = null)
         {
             _health -= damage;
@@ -18,6 +30,22 @@ namespace GFA.TPS
         }
         private void Explode()
         {
+            var hits = Physics.OverlapSphere(transform.position,_explosionRadius);
+            foreach (var hit in hits)
+            {
+                var distance = Vector3.Distance(transform.position , hit.transform.position);
+                var rate = distance / _explosionRadius;
+                var falloff = _explosionFalloff.Evaluate(rate);
+
+                if (hit.transform.TryGetComponent<IDamageable>(out var damageable))
+                {
+                    damageable.ApplyDamage(_explosionDamage + falloff);
+                }
+                if (hit.attachedRigidbody)
+                {
+                    hit.attachedRigidbody.AddExplosionForce(_explosionForce, transform.position, _explosionRadius, 1, ForceMode.Impulse);
+                }
+            }
             Destroy(gameObject);
         }
     }
