@@ -73,13 +73,14 @@ namespace GFA.TPS.Movement
                     enabled = false;
                 }
 
-                targetPosition = hit.point;
-                Impacted?.Invoke(hit);
+                targetPosition = hit.point + transform.forward * 0.01f;
                 if (ShouldBounce)
                 {
                     var reflectedDirection = Vector3.Reflect(direction, hit.normal);
                     transform.forward = reflectedDirection;
                 }
+                Impacted?.Invoke(hit);
+
 
             }
 
