@@ -34,7 +34,7 @@ namespace GFA.TPS
                 ClearGraphics();
             }
             _weapon = weapon;
-            if (!weapon)
+            if (weapon)
             {
                 CreateGraphics();
             }
@@ -70,6 +70,10 @@ namespace GFA.TPS
             }
 
             var inst = Instantiate(projectileToInstantiate, _activeWeaponGraphics.ShootTransform.position, _activeWeaponGraphics.ShootTransform.rotation);
+            if(inst.TryGetComponent<ProjectileDamage>(out var projectileDamage))
+            {
+                projectileDamage.Damage = _weapon.BaseDamage;
+            }
 
             var rand = Random.value; // between 0 and 1
             var maxAngle = 30 - 30 * Mathf.Max(_weapon.Accuracy - _recoilValue,0);
@@ -82,6 +86,8 @@ namespace GFA.TPS
 
             _lastShootTime = Time.time;
             _recoilValue += _weapon.Recoil;
+
+            _activeWeaponGraphics.OnShoot();
         }
 
         private void Update()
