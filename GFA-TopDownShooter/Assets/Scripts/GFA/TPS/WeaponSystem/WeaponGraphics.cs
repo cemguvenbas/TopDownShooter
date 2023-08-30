@@ -12,10 +12,10 @@ namespace GFA.TPS.WeaponSystem
 
         public Transform ShootTransform => _shootTransform;
 
-        public event Action Shoot; 
-        public void OnShoot()
+        public event Action Shot; 
+        public void OnShot()
         {
-            Shoot?.Invoke();
+            Shot?.Invoke();
         }
     }
 }

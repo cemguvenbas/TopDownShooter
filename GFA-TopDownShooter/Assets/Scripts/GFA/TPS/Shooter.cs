@@ -76,7 +76,7 @@ namespace GFA.TPS
             }
 
             var rand = Random.value; // between 0 and 1
-            var maxAngle = 30 - 30 * Mathf.Max(_weapon.Accuracy - _recoilValue,0);
+            var maxAngle = 15 - 15 * Mathf.Max(_weapon.Accuracy - _recoilValue,0);
             var randomAngle = Mathf.Lerp(-maxAngle, maxAngle, rand);
 
             var forward = inst.transform.forward;
@@ -87,7 +87,7 @@ namespace GFA.TPS
             _lastShootTime = Time.time;
             _recoilValue += _weapon.Recoil;
 
-            _activeWeaponGraphics.OnShoot();
+            _activeWeaponGraphics.OnShot();
         }
 
         private void Update()

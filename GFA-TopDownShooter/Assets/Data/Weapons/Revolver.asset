@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a1d8583ccc7e3340ba640522f06b317, type: 3}
   m_Name: Revolver
   m_EditorClassIdentifier: 
+  _baseDamage: 1
   _fireRate: 0.5
   _accuracy: 0.7
   _recoil: 0.05
