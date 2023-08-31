@@ -22,7 +22,7 @@ namespace GFA.TPS.MatchSystem
         {
             StartCoroutine(CreateEnemy());
         }
-        private Vector3 GetSpawnOffSetByViewportPosition(Vector3 viewport, float sign)
+        private Vector3 GetSpawnOffSetByViewportPosition(Vector3 viewport)
         {
 
             return Vector3.up * _offset;
