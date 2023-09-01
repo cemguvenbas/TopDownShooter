@@ -22,10 +22,10 @@ namespace GFA.TPS.MatchSystem
         {
             StartCoroutine(CreateEnemy());
         }
-        private Vector3 GetSpawnOffSetByViewportPosition(Vector3 viewport)
+        private Vector3 GetSpawnOffSetByViewportPosition(Vector3 vector, float sign)
         {
 
-            return Vector3.up * _offset;
+            return vector * sign * _offset;
         }
 
         private IEnumerator CreateEnemy()
@@ -34,20 +34,29 @@ namespace GFA.TPS.MatchSystem
             {
                 yield return new WaitForSeconds(0.5f);
                 var viewportPoint = Vector3.zero;
+
+                var offset = Vector3.zero;
+
                 if (Random.value > 0.5)
                 {
-                    viewportPoint = new Vector3(Mathf.Round(Random.value), Random.value);                    
+                    var dir = Mathf.Round(Random.value);
+                    viewportPoint = new Vector3(dir, Random.value);
+
+                    offset = GetSpawnOffSetByViewportPosition(Vector3.right, dir < 0.001f ? -1f : 1f);
                 }
                 else
                 {
-                    viewportPoint = new Vector3(Random.value, Mathf.Round(Random.value));
+                    var dir = Mathf.Round(Random.value);
+                    viewportPoint = new Vector3(Random.value,dir);
+
+                    offset = GetSpawnOffSetByViewportPosition(Vector3.forward, dir < 0.001f ? -1f : 1f);
                 }
-                var offset = GetSpawnOffSetByViewportPosition(viewportPoint);
+
                 var ray = _camera.ViewportPointToRay(viewportPoint);
 
                 if (_plane.Raycast(ray,out float enter))
                 {
-                    var worldPosition = ray.GetPoint(enter) - offset;
+                    var worldPosition = ray.GetPoint(enter) + offset;
                     var inst = GameObject.CreatePrimitive(PrimitiveType.Capsule);
                     inst.transform.position = worldPosition;
                 }
