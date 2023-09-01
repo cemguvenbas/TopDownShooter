@@ -12,6 +12,9 @@ namespace GFA.TPS.MatchSystem
         private Plane _plane = new Plane(Vector3.up, Vector3.zero);
 
         [SerializeField]
+        private MatchInstance _matchInstance;
+
+        [SerializeField]
         private float _offset;
 
         private void Awake()
