@@ -15,6 +15,10 @@ namespace GFA.TPS.MatchSystem
         {
             Time += delta;
         }
+        public void Reset()
+        {
+            Time = 0;
+        }
     }
 }
 

@@ -40,7 +40,7 @@ namespace GFA.TPS.MatchSystem
 
             if (_enemySpawnData.TryGetEntryByTime(time,out SpawnEntry entry))
             {
-                return entry.Prefabs[Random.Range(0, entry.Prefabs.Length - 1)];
+                return entry.Prefabs[Random.Range(0, entry.Prefabs.Length)];
             }
             return null;
         }
