@@ -15,6 +15,9 @@ namespace GFA.TPS.MatchSystem
         private MatchInstance _matchInstance;
 
         [SerializeField]
+        private EnemySpawnData _enemySpawnData;
+
+        [SerializeField]
         private float _offset;
 
         private void Awake()
@@ -29,6 +32,17 @@ namespace GFA.TPS.MatchSystem
         {
 
             return vector * sign * _offset;
+        }
+
+        private GameObject GetSpawnObject()
+        {
+            var time = _matchInstance.Time;
+
+            if (_enemySpawnData.TryGetEntryByTime(time,out SpawnEntry entry))
+            {
+                return entry.Prefabs[Random.Range(0, entry.Prefabs.Length - 1)];
+            }
+            return null;
         }
 
         private IEnumerator CreateEnemy()
@@ -60,7 +74,7 @@ namespace GFA.TPS.MatchSystem
                 if (_plane.Raycast(ray,out float enter))
                 {
                     var worldPosition = ray.GetPoint(enter) + offset;
-                    var inst = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+                    var inst = Instantiate(GetSpawnObject(), worldPosition, Quaternion.identity);
                     inst.transform.position = worldPosition;
                 }
 
