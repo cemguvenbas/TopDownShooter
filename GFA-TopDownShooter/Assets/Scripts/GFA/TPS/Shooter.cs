@@ -1,7 +1,9 @@
+using GFA.TPS.Movement;
 using GFA.TPS.WeaponSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 namespace GFA.TPS
 {
@@ -22,6 +24,44 @@ namespace GFA.TPS
 
         [SerializeField]
         private Transform _weaponContainer;
+
+        private static IObjectPool<GameObject> _projectilePool;
+
+        private void Awake()
+        {
+            _projectilePool = new ObjectPool<GameObject>(CreatePoolProjectile,OnGetPoolProjectile,OnReleasePoolObject,OnDestroyFromPool);
+        }
+
+        private void OnDestroyFromPool(GameObject obj)
+        {
+            Destroy(obj);
+        }
+
+        private void OnReleasePoolObject(GameObject obj)
+        {
+            obj.SetActive(false);
+        }
+
+        private void OnGetPoolProjectile(GameObject obj)
+        {
+            obj.SetActive(true);
+        }
+
+        private GameObject CreatePoolProjectile()
+        {
+            var projectileToInstantiate = _defaultProjectilePrefab;
+            if (_weapon.ProjectilePrefab)
+            {
+                projectileToInstantiate = _weapon.ProjectilePrefab;
+            }
+
+            var inst = Instantiate(projectileToInstantiate, _activeWeaponGraphics.ShootTransform.position, _activeWeaponGraphics.ShootTransform.rotation);
+            if (inst.TryGetComponent<ProjectileMovement>(out var projectileMovement))
+            {
+                projectileMovement.DestroyRequested += () => { _projectilePool.Release(inst); };
+            }
+            return inst;
+        }
 
         private void Start()
         {
@@ -63,13 +103,8 @@ namespace GFA.TPS
 
             if (!CanShoot) return;
 
-            var projectileToInstantiate = _defaultProjectilePrefab;
-            if (_weapon.ProjectilePrefab)
-            {
-                projectileToInstantiate = _weapon.ProjectilePrefab;
-            }
+            var inst = _projectilePool.Get();
 
-            var inst = Instantiate(projectileToInstantiate, _activeWeaponGraphics.ShootTransform.position, _activeWeaponGraphics.ShootTransform.rotation);
             if(inst.TryGetComponent<ProjectileDamage>(out var projectileDamage))
             {
                 projectileDamage.Damage = _weapon.BaseDamage;

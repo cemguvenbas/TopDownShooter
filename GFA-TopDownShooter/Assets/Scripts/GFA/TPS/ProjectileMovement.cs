@@ -43,9 +43,15 @@ namespace GFA.TPS.Movement
             set => _shouldBounce = value;
         }
 
-        [SerializeField] private float _pushPower;
+        [SerializeField]
+        private float _pushPower;
+
+        [SerializeField]
+        private float _lifetime;
 
         public event Action<RaycastHit> Impacted;
+
+        public event Action DestroyRequested;
 
         private void Update()
         {
@@ -66,7 +72,8 @@ namespace GFA.TPS.Movement
                 }
                 if (ShouldDestroyOnCollision)
                 {
-                    Destroy(gameObject);
+                    DestroyRequested?.Invoke();
+                    //Destroy(gameObject);
                 }
                 if (ShouldDisableOnCollision)
                 {
