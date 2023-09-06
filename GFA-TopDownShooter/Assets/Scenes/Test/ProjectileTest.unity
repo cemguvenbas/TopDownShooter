@@ -401,6 +401,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5621722259356513055, guid: f31540c1726262b4e9b60eec11adf064,
+        type: 3}
+      propertyPath: _lifetime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5621722259356513055, guid: f31540c1726262b4e9b60eec11adf064,
+        type: 3}
+      propertyPath: _shouldBounce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5621722259356513055, guid: f31540c1726262b4e9b60eec11adf064,
+        type: 3}
+      propertyPath: _shouldDestroyOnCollision
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5621722259356513055, guid: f31540c1726262b4e9b60eec11adf064,
+        type: 3}
+      propertyPath: _shouldDisableOnCollision
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8396855286928404812, guid: f31540c1726262b4e9b60eec11adf064,
         type: 3}
       propertyPath: m_Name

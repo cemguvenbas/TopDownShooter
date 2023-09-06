@@ -48,6 +48,17 @@ namespace GFA.TPS.Movement
 
         [SerializeField]
         private float _lifetime;
+        private float _spawnTime;
+
+        private void Awake()
+        {
+            ResetSpawnTime();
+        }
+
+        public void ResetSpawnTime()
+        {
+            _spawnTime = Time.time;
+        }
 
         public event Action<RaycastHit> Impacted;
 
@@ -55,6 +66,11 @@ namespace GFA.TPS.Movement
 
         private void Update()
         {
+            if (_lifetime > 0 && Time.time - _spawnTime > _lifetime)
+            {
+                DestroyRequested?.Invoke();
+                return;
+            }
             var direction = transform.forward;
             direction.x *= _movementPlane.x;
             direction.y *= _movementPlane.y;

@@ -39,12 +39,20 @@ namespace GFA.TPS
 
         private void OnReleasePoolObject(GameObject obj)
         {
-            obj.SetActive(false);
+            if (obj.TryGetComponent<ProjectileMovement>(out var movement))
+            {
+                movement.enabled = false;
+            }
         }
 
         private void OnGetPoolProjectile(GameObject obj)
         {
-            obj.SetActive(true);
+            if (obj.TryGetComponent<ProjectileMovement>(out var movement))
+            {
+                movement.enabled = true;
+                movement.ResetSpawnTime();
+            }
+            
         }
 
         private GameObject CreatePoolProjectile()
@@ -104,8 +112,17 @@ namespace GFA.TPS
             if (!CanShoot) return;
 
             var inst = _projectilePool.Get();
+            inst.transform.position = _activeWeaponGraphics.ShootTransform.position;
+            inst.transform.rotation = _activeWeaponGraphics.ShootTransform.rotation;
 
-            if(inst.TryGetComponent<ProjectileDamage>(out var projectileDamage))
+            var trail = inst.GetComponentInChildren<TrailRenderer>();
+            if (trail)
+            {
+                trail.Clear();
+                //StartCoroutine(ClearTrailerRendererDelayed(trail));
+            }
+
+            if (inst.TryGetComponent<ProjectileDamage>(out var projectileDamage))
             {
                 projectileDamage.Damage = _weapon.BaseDamage;
             }

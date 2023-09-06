@@ -197,6 +197,7 @@ MonoBehaviour:
   _shouldDisableOnCollision: 0
   _shouldBounce: 1
   _pushPower: 0.01
+  _lifetime: 5
 --- !u!114 &934481773601633440
 MonoBehaviour:
   m_ObjectHideFlags: 0
