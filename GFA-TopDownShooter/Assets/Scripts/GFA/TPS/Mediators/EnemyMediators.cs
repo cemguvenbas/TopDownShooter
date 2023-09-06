@@ -13,7 +13,7 @@ namespace GFA.TPS.Mediators
             _health -= damage;
             if (_health <= 0)
             {
-                gameObject.SetActive(false);
+                gameObject.SetActive(false); 
             }
         }
     }
