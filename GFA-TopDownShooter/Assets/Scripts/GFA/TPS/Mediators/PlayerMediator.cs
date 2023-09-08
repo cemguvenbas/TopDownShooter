@@ -8,7 +8,7 @@ using System;
 
 namespace GFA.TPS.Mediators
 {
-    public class PlayerMediator : MonoBehaviour
+    public class PlayerMediator : MonoBehaviour, IDamageable
     {
         private CharacterMovement _characterMovement;
         private Shooter _shooter;
@@ -21,6 +21,9 @@ namespace GFA.TPS.Mediators
         private Plane _plane = new Plane(Vector3.up, Vector3.zero); // our ground should be flat to use Plane
 
         private Camera _camera;
+
+        [SerializeField]
+        private float _health;
 
         private void Awake()
         {
@@ -78,6 +81,11 @@ namespace GFA.TPS.Mediators
                     _characterMovement.Rotation = angle;
                 }
             }
+        }
+
+        public void ApplyDamage(float damage, GameObject causer = null)
+        {
+
         }
     }
 }
