@@ -23,8 +23,7 @@ namespace GFA.TPS.AI
 
                 if (_aiBehaviour)
                 {
-                    _aiState = _aiBehaviour.CreateState();
-                    _aiBehaviour.Begin(this);
+                    BeginBehaviour();
                 }
             }
         }
@@ -33,7 +32,15 @@ namespace GFA.TPS.AI
 
         private void Awake()
         {
-            if (_aiBehaviour) _aiBehaviour.Begin(this);
+            if (_aiBehaviour) {
+                BeginBehaviour();
+            }
+        }
+
+        private void BeginBehaviour()
+        {
+            _aiState = _aiBehaviour.CreateState();
+            _aiBehaviour.Begin(this);
         }
         private void Update()
         {

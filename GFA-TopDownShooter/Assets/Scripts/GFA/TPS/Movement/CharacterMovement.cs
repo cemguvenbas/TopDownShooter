@@ -29,6 +29,7 @@ namespace GFA.TPS.Movement
             transform.eulerAngles = new Vector3(0, Rotation);
             _characterController.SimpleMove(movement * _movementSpeed + ExternalForces);
             ExternalForces = Vector3.Lerp(ExternalForces, Vector3.zero, 8 * Time.deltaTime);
+            MovementInput = Vector2.zero;
         }
     }
 }
