@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GFA.TPS.AI;
+using GFA.TPS.AI.States;
 
 namespace GFA.TPS.AI
 {
@@ -21,10 +23,14 @@ namespace GFA.TPS.AI
 
                 if (_aiBehaviour)
                 {
+                    _aiState = _aiBehaviour.CreateState();
                     _aiBehaviour.Begin(this);
                 }
             }
         }
+
+        private AIState _aiState;
+
         private void Awake()
         {
             if (_aiBehaviour) _aiBehaviour.Begin(this);
@@ -34,6 +40,19 @@ namespace GFA.TPS.AI
             if (AIBehaviour)
             {
                 AIBehaviour.OnUpdate(this);
+            }
+        }
+        public bool TryGetState<T>(out T state) where T : AIState
+        {
+            if (_aiState is T casted)
+            {
+                state = casted;
+                return true;
+            }
+            else
+            {
+                state = null;
+                return false;
             }
         }
     }

@@ -1,3 +1,5 @@
+using GFA.TPS.AI.States;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +18,11 @@ namespace GFA.TPS.AI
         }
         public abstract void End(AIController controller);
         protected abstract void Execute(AIController controller);
+
+        public virtual AIState CreateState()
+        {
+            return new NullAIState();
+        }
     }
 }
 

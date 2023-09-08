@@ -1,7 +1,6 @@
+using GFA.TPS.AI.States;
 using GFA.TPS.MatchSystem;
 using GFA.TPS.Movement;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace GFA.TPS.AI.Behaviours
@@ -16,14 +15,19 @@ namespace GFA.TPS.AI.Behaviours
         private MatchInstance _matchInstance;
         public override void Begin(AIController controller)
         {
-
+            if (controller.TryGetState<BasicAIState>(out var state))
+            {
+                state.CharacterMovement = controller.GetComponent<CharacterMovement>();
+            }
         }
 
         protected override void Execute(AIController controller)
         {
+            if (!controller.TryGetState<BasicAIState>(out var state)) return;
+
             var player = _matchInstance.Player;
 
-            var movement = controller.GetComponent<CharacterMovement>();
+            var movement = state.CharacterMovement;
 
             var dist = Vector3.Distance(player.transform.position , controller.transform.position);
             if (dist < _acceptanceRadius)
@@ -42,6 +46,11 @@ namespace GFA.TPS.AI.Behaviours
         public override void End(AIController controller)
         {
             
+        }
+
+        public override AIState CreateState()
+        {
+            return new BasicAIState();
         }
     }
 }
