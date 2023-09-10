@@ -104,7 +104,6 @@ namespace GFA.TPS.Movement
                 }
                 Impacted?.Invoke(hit);
 
-
             }
 
             Debug.DrawLine(transform.position, targetPosition, Color.red);

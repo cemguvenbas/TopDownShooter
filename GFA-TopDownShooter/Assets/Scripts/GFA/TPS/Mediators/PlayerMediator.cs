@@ -12,11 +12,14 @@ namespace GFA.TPS.Mediators
     {
         private CharacterMovement _characterMovement;
         private Shooter _shooter;
+        private XPCollectibleAttractor _xPCollectibleAttractor;
 
         private GameInput _gameInput;
 
         [SerializeField]
         private float _dodgePower;
+
+        private float _xp;
 
         private Plane _plane = new Plane(Vector3.up, Vector3.zero); // our ground should be flat to use Plane
 
@@ -30,6 +33,7 @@ namespace GFA.TPS.Mediators
             _characterMovement = GetComponent<CharacterMovement>();
             _shooter = GetComponent<Shooter>();
             _gameInput = new GameInput();
+            _xPCollectibleAttractor = GetComponent<XPCollectibleAttractor>();
             _camera = Camera.main;
         }
 
@@ -37,13 +41,19 @@ namespace GFA.TPS.Mediators
         {
             _gameInput.Enable();
             _gameInput.Player.Dodge.performed += OnDodgeRequested;
+            _xPCollectibleAttractor.XPCollected += OnAttractorXPCollected;
         }
 
         private void OnDisable()
         {
             _gameInput.Disable();
             _gameInput.Player.Dodge.performed -= OnDodgeRequested;
+            _xPCollectibleAttractor.XPCollected -= OnAttractorXPCollected;
+        }
 
+        private void OnAttractorXPCollected(float xp)
+        {
+            _xp += xp; 
         }
 
         private void OnDodgeRequested(InputAction.CallbackContext obj)
@@ -78,7 +88,7 @@ namespace GFA.TPS.Mediators
                     var worldPosition = ray.GetPoint(enter); // Plane and ray's intersection point 
                     var dir = (worldPosition - transform.position).normalized;
                     var angle = -Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg + 90; //Quaternion.LookRotation(dir).eulerAngles.y; works as well instead of Atan2.
-                    _characterMovement.Rotation = angle;
+                    _characterMovement.Rotation = angle;    
                 }
             }
         }

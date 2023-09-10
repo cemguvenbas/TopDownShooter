@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4557463770092256904
+--- !u!1 &4181916800321868905
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,46 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2327339035728180051}
-  - component: {fileID: 3581158133040621611}
-  - component: {fileID: 8630967728165219916}
+  - component: {fileID: 2697096295102992976}
+  - component: {fileID: 6508182948820987537}
+  - component: {fileID: 6385303538936109243}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2327339035728180051
+--- !u!4 &2697096295102992976
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4557463770092256904}
+  m_GameObject: {fileID: 4181916800321868905}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1768334305652429437}
+  m_Father: {fileID: 4245588875310268604}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3581158133040621611
+--- !u!33 &6508182948820987537
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4557463770092256904}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &8630967728165219916
+  m_GameObject: {fileID: 4181916800321868905}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &6385303538936109243
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4557463770092256904}
+  m_GameObject: {fileID: 4181916800321868905}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4f4adccfe0d5b7b4d9a71e650a7e1894, type: 2}
+  - {fileID: 2100000, guid: 7ddde852f32536945abc651a772f6a62, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,7 +83,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &8427340196766944544
+--- !u!1 &4725062739574305339
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,54 +91,51 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1768334305652429437}
-  - component: {fileID: -5103072915538866850}
-  - component: {fileID: 4554499942642617645}
-  - component: {fileID: -5223301598789910620}
-  - component: {fileID: 5996355210058205915}
-  m_Layer: 6
-  m_Name: Enemy_02
+  - component: {fileID: 4245588875310268604}
+  - component: {fileID: 534743260619724075}
+  - component: {fileID: 2879779619107870755}
+  m_Layer: 7
+  m_Name: XPCollectible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1768334305652429437
+--- !u!4 &4245588875310268604
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8427340196766944544}
+  m_GameObject: {fileID: 4725062739574305339}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2327339035728180051}
+  - {fileID: 2697096295102992976}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-5103072915538866850
+--- !u!114 &534743260619724075
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8427340196766944544}
+  m_GameObject: {fileID: 4725062739574305339}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbe124cf76fbec149944f343a525bb29, type: 3}
+  m_Script: {fileID: 11500000, guid: 61863084c12e39d43a67d54a4cc48b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 1
---- !u!143 &4554499942642617645
-CharacterController:
+--- !u!65 &2879779619107870755
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8427340196766944544}
+  m_GameObject: {fileID: 4725062739574305339}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -151,37 +148,5 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &-5223301598789910620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8427340196766944544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ef146370f1f683488be81dd2a3633aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _acceptanceRadius: 1
-  _matchInstance: {fileID: 11400000, guid: b355c95bffaf3794bb10679eaad3dc75, type: 2}
---- !u!114 &5996355210058205915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8427340196766944544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12aa01b2e3c90e84080594c45c8ab815, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _aiBehaviour: {fileID: 11400000, guid: d123b4cca69f753488242698833c1c2c, type: 2}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

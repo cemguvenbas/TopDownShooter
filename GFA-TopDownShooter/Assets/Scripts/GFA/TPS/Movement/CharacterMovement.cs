@@ -17,7 +17,7 @@ namespace GFA.TPS.Movement
         private float _movementSpeed = 4;
 
         public Vector3 Velocity => _characterController.velocity; // to detect our dodge axis.
-
+            
         private void Awake()
         {
             _characterController = GetComponent<CharacterController>();
