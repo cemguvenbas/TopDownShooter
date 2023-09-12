@@ -10,6 +10,10 @@ namespace GFA.TPS.Mediators
 {
     public class PlayerMediator : MonoBehaviour, IDamageable
     {
+        [SerializeField]
+        private Attributes _attributes;
+        public Attributes Attributes => _attributes;
+
         private CharacterMovement _characterMovement;
         private Shooter _shooter;
         private XPCollectibleAttractor _xPCollectibleAttractor;
@@ -19,7 +23,12 @@ namespace GFA.TPS.Mediators
         [SerializeField]
         private float _dodgePower;
 
+        private int _level;
+        public int Level => _level;
+
         private float _xp;
+
+        public float MaxHP => (_level + 1) * 5;
 
         private Plane _plane = new Plane(Vector3.up, Vector3.zero); // our ground should be flat to use Plane
 
@@ -27,6 +36,8 @@ namespace GFA.TPS.Mediators
 
         [SerializeField]
         private float _health;
+
+        public event Action<int> LevelledUp;
 
         private void Awake()
         {
@@ -53,7 +64,19 @@ namespace GFA.TPS.Mediators
 
         private void OnAttractorXPCollected(float xp)
         {
-            _xp += xp; 
+            AddXP(xp);
+        }
+
+        private void AddXP(float value)
+        {
+            _xp += value;
+            if (_xp >= MaxHP)
+            {
+                _level++;
+                _xp = 0;
+                LevelledUp?.Invoke(_level);                
+            }
+
         }
 
         private void OnDodgeRequested(InputAction.CallbackContext obj)
@@ -63,11 +86,19 @@ namespace GFA.TPS.Mediators
 
         private void Update()
         {
+            HandleAttributes();
             HandleMovement();
             if (_gameInput.Player.Shoot.IsPressed())
             {
                 _shooter.Shoot();
             }            
+        }
+
+        private void HandleAttributes()
+        {
+            _characterMovement.MovementSpeed = Attributes.MovementSpeed;
+            _shooter.AttackSpeedMultiplier = Attributes.AttackSpeed;
+            _shooter.BaseDamage = Attributes.Damage;
         }
 
         private void HandleMovement()
