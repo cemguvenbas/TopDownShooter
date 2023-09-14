@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1247e56572b222641996369a927e2111, type: 3}
   m_Name: MovementSpeedBooster
   m_EditorClassIdentifier: 
-  _description: Adds +20% movement speed
+  _description: Adds +10% movement speed
   _boosterName: Movement Speed
-  _value: 0.2
+  _value: 0.1
