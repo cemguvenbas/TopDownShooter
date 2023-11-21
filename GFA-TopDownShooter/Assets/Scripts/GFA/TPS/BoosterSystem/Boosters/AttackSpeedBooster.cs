@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace GFA.TPS.BoosterSystem.Boosters
 {
-
     [CreateAssetMenu(menuName = "Boosters/Attack Speed")]
     public class AttackSpeedBooster : Booster
     {
